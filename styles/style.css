@@ -355,7 +355,7 @@
     }
 
     .img {
-        background-image: url('../images/Profile.jpg');
+        background-image: url('../images/profile.jpg');
         background-color: #eaeaea;
         background-size: cover;
         border-radius: 100px;
