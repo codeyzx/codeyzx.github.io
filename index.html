@@ -17,22 +17,71 @@
         border: 1px solid black;
         background-color: #eee;
       }
-      button {
+
+      .btnkabur {
+        background: #13aa52;
+        border-radius: 11px;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 1.15em;
+        font-weight: 700;
+        justify-content: center;
+        padding: 0.8em 1em;
+        text-align: center;
+        text-decoration: none;
+        text-decoration-skip-ink: auto;
+        text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+        text-underline-offset: 1px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: 220px;
+        word-break: break-word;
+        border: 0;
+
         position: absolute;
-        top: 600px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 10px 20px;
-        font-size: 16px;
-        margin-top: 20px;
+        margin-top: 500px;
       }
     </style>
   </head>
   <body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"
+      integrity="sha512-aNMyYYxdIxIaot0Y1/PLuEu3eipGCmsEUBrUq+7aVyPGMFH8z0eTP0tkqAvv34fzN6z+201d3T8HPb1svWSKHQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <!-- button to navigation -->
-    <button onclick="location.href='./index2.html'">Go To My Portfolio</button>
+
+    <a href="#" class="btnkabur">Go To My Portfolio</a>
     <script>
+      const button = document.querySelector(".btnkabur");
+
+      const animateMove = (element, prop, pixels) =>
+        anime({
+          targets: element,
+          [prop]: `${pixels}px`,
+          easing: "easeOutCirc",
+        });
+
+      ["mouseover", "click"].forEach(function (el) {
+        button.addEventListener(el, function (event) {
+          console.log("well");
+          const top = getRandomNumber(window.innerHeight - this.offsetHeight);
+          const left = getRandomNumber(window.innerWidth - this.offsetWidth);
+          animateMove(this, "left", left).play();
+          animateMove(this, "top", top).play();
+        });
+      });
+
+      const getRandomNumber = (num) => {
+        return Math.floor(Math.random() * (num * 0.5));
+      };
+
       const canvas = document.getElementById("gameCanvas");
       const ctx = canvas.getContext("2d");
       const box = 20;
