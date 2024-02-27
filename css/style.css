@@ -447,11 +447,10 @@ article .icon {
   border-color: rgb(163, 163, 163);
 }
 
-/* CONTACT */
-
 .petscape {
-  margin-top: 20px;
+  margin-top: 50px;
 }
+/* CONTACT */
 
 #contact {
   display: flex;
