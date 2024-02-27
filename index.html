@@ -17,14 +17,19 @@
         border: 1px solid black;
         background-color: #eee;
       }
-
+      .content {
+        flex-direction: column;
+        display: flex;
+      }
       .btnkabur {
         background: #13aa52;
         border-radius: 11px;
         box-sizing: border-box;
         color: #fff;
         cursor: pointer;
-        display: inline-block;
+        display: flex;
+        align-self: center;
+        margin-top: 420px;
         font-size: 1.15em;
         font-weight: 700;
         justify-content: center;
@@ -40,9 +45,7 @@
         width: 220px;
         word-break: break-word;
         border: 0;
-
         position: absolute;
-        margin-top: 500px;
       }
     </style>
   </head>
@@ -53,11 +56,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <!-- button to navigation -->
-
-    <a href="#" class="btnkabur">Go To My Portfolio</a>
+    <div class="content">
+      <canvas id="gameCanvas" width="400" height="400"></canvas>
+      <a href="#" class="btnkabur">Go To My Portfolio</a>
+    </div>
     <script>
       const button = document.querySelector(".btnkabur");
 
