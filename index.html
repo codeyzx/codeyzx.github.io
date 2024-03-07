@@ -16,10 +16,13 @@
       canvas {
         border: 1px solid black;
         background-color: #eee;
+        max-width: 100%;
+        height: auto;
       }
       .content {
         flex-direction: column;
         display: flex;
+        align-items: center;
       }
       .btnkabur {
         background: #13aa52;
@@ -27,12 +30,9 @@
         box-sizing: border-box;
         color: #fff;
         cursor: pointer;
-        display: flex;
-        align-self: center;
-        margin-top: 420px;
+        margin-top: 20px;
         font-size: 1.15em;
         font-weight: 700;
-        justify-content: center;
         padding: 0.8em 1em;
         text-align: center;
         text-decoration: none;
@@ -45,21 +45,24 @@
         width: 220px;
         word-break: break-word;
         border: 0;
-        position: absolute;
       }
     </style>
   </head>
   <body>
+    <div class="content">
+      <h1>Press arrow top, left, right, down to Start Game</h1>
+      <canvas id="gameCanvas"></canvas>
+      <h2>
+        Have a problem with the game? <a href="index2.html">click here</a>
+      </h2>
+      <a href="#" class="btnkabur">Go To My Portfolio</a>
+    </div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"
       integrity="sha512-aNMyYYxdIxIaot0Y1/PLuEu3eipGCmsEUBrUq+7aVyPGMFH8z0eTP0tkqAvv34fzN6z+201d3T8HPb1svWSKHQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <div class="content">
-      <canvas id="gameCanvas" width="400" height="400"></canvas>
-      <a href="#" class="btnkabur">Go To My Portfolio</a>
-    </div>
     <script>
       const button = document.querySelector(".btnkabur");
 
@@ -72,7 +75,6 @@
 
       ["mouseover", "click"].forEach(function (el) {
         button.addEventListener(el, function (event) {
-          console.log("well");
           const top = getRandomNumber(window.innerHeight - this.offsetHeight);
           const left = getRandomNumber(window.innerWidth - this.offsetWidth);
           animateMove(this, "left", left).play();
@@ -86,7 +88,7 @@
 
       const canvas = document.getElementById("gameCanvas");
       const ctx = canvas.getContext("2d");
-      const box = 20;
+      let box = 20;
       let snake = [{ x: 200, y: 200 }];
       let food = {
         x: Math.floor(Math.random() * 20) * box,
@@ -110,6 +112,15 @@
       }
 
       function draw() {
+        let canvasWidth =
+          window.innerWidth > 400 ? 400 : window.innerWidth - 20;
+        let canvasHeight =
+          window.innerHeight > 400 ? 400 : window.innerHeight - 20;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+
+        box = Math.min(canvasWidth, canvasHeight) / 20;
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "green";
         for (let i = 0; i < snake.length; i++) {
@@ -118,8 +129,8 @@
         ctx.fillStyle = "red";
         ctx.fillRect(food.x, food.y, box, box);
         ctx.fillStyle = "black";
-        ctx.font = "20px Arial";
-        ctx.fillText("Score: " + score, 10, 20);
+        ctx.font = `${box}px Arial`;
+        ctx.fillText("Score: " + score, box, box);
         let snakeX = snake[0].x;
         let snakeY = snake[0].y;
         if (snakeX === food.x && snakeY === food.y) {
